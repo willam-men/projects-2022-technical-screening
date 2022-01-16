@@ -49,6 +49,9 @@ const altNumbers = (numArray) => {
         // negative numbers should be first in the alternating array
 
         // vice versa for more positive than negative numbers
+
+        // alternate pushing elements from positive and negative arrays into 
+        // a new array
         if (negative_numbers.length > positive_numbers.length) {
             if (j < negative_numbers.length) {
                 alternated.push(negative_numbers[i]);
@@ -69,6 +72,7 @@ const altNumbers = (numArray) => {
             } 
         }
     }
+    // console.log(alternated);
     return alternated;
     // TODO: COMPLETE THIS FUNCTION
     // return [];
