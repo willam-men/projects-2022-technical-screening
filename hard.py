@@ -32,12 +32,61 @@ def is_unlocked(courses_list, target_course):
 
     You can assume all courses are worth 6 units of credit
     """
-    
+    total_uoc = len(courses_list) * 6
+    # print(total_uoc)
+
+    target_conditions = CONDITIONS[target_course]
+
+    # no courses required
+    if target_conditions == "":
+        return True
+
+    if "and" in target_conditions.lower():
+        target_conditions = target_conditions.split('AND')
+        print(target_conditions)
+        for targets in target_conditions:
+            print(targets)
+            for courses in courses_list:
+                print(courses)
+                if courses not in targets: 
+                    return False
+            
+    target_conditions = target_conditions.split(" ")
+
+    if "or" in target_conditions:
+        for courses in courses_list:
+            if courses in target_conditions:
+                return True
+
+    # certain number of credits required
+    if "credit" in target_conditions: 
+        # extract the number of credits required
+        for word in target_conditions:
+            if word.isdigit():
+                credit = int(word)
+        # print(credit)
+        # if there is not enough credits return False
+        if total_uoc >= credit:
+            return True
+        else: 
+            return False
+        
+    for courses in courses_list:
+        if courses in target_conditions:
+            return True
+
     # TODO: COMPLETE THIS FUNCTION!!!
+    # print(CONDITIONS[target_course])
+    # print(courses_list)
+    # print(target_course)
+
     
-    return True
+    return False
 
-
+if __name__ == "__main__":
+    print(is_unlocked(["COMP1511", "COMP1521", "COMP1531", "COMP2521"], "COMP4161"))
+    # is_unlocked(["ELEC2141"], "COMP3211")
+    # is_unlocked(["COMP1511", "COMP1521", "COMP1531"], "COMP3153")
 
 
 
