@@ -31,8 +31,47 @@ var assert = require("assert")
 // Explanation: Empty array...
 
 const altNumbers = (numArray) => {
+    // split the array into two arrays
+    // an array of the positive numbers
+    // an array of the negative numbers
+    const positive_numbers = numArray.filter(x => x >= 0);
+    const negative_numbers= numArray.filter(x => x < 0);
+    const alternated = [];
+
+    // console.log(positive_numbers);
+    // console.log(negative_numbers);
+
+    // loop through the original array until either 
+    // - the positive numbers have all been looped through
+    // - the negative numbers have all been looped through
+    for (let i = 0, j = 0; (i < positive_numbers.length || j < negative_numbers.length); i++, j++) {
+        // if there are more negative numbers than positive numbers
+        // negative numbers should be first in the alternating array
+
+        // vice versa for more positive than negative numbers
+        if (negative_numbers.length > positive_numbers.length) {
+            if (j < negative_numbers.length) {
+                alternated.push(negative_numbers[i]);
+            } if (i < positive_numbers.length) {
+                alternated.push(positive_numbers[i]);
+            }
+        } else if (positive_numbers.length > negative_numbers.length) {
+            if (i < positive_numbers.length) {
+                alternated.push(positive_numbers[i]);
+            } if (j < negative_numbers.length) {
+                alternated.push(negative_numbers[i]);
+            } 
+        } else {
+            if (i < positive_numbers.length) {
+                alternated.push(positive_numbers[i]);
+            } if (j < negative_numbers.length) {
+                alternated.push(negative_numbers[i]);
+            } 
+        }
+    }
+    return alternated;
     // TODO: COMPLETE THIS FUNCTION
-    return [];
+    // return [];
 }
 
 module.exports = { altNumbers } // Do not modify this line
